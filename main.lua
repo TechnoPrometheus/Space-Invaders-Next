@@ -1,7 +1,7 @@
 --[[
 =======================================================================
 title: Space Invaders Next - Copyright (c) 2017 Stefano Peris
-version:0.2
+version:0.3
 license: MIT
 author: Stefano Peris {TechnoPrometheus}
 date: 17/01/2017
