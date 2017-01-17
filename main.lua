@@ -28,8 +28,8 @@ function love.load()
     if player.cooldown <= 0 then
       player.cooldown = 20
       bullet = {}
-      bullet.x = player.x +14 -- bullets spawn position.
-      bullet.y = player.y -1
+      bullet.x = player.x +14 -- bullet spawn orizontal position.
+      bullet.y = player.y +1 -- bullet spawn vertical position.
       table.insert(player.bullets, bullet)
     end
   end
