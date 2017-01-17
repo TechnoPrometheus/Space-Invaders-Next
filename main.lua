@@ -10,19 +10,25 @@ love_Engine_version: 0.10.2
 =======================================================================
 ]]
 
-function love.load(arg)
+function love.load()
   player = {}
-  player.x = 0 -- Variabile che determina la velocità del rettangolo sull'asse x.
+  player.x = 0
   player.bullets = {}
-  player.fire = function(arg)
-    bullet = {}
-    bullet.x = player.x
-    bullet.y = 400
-    table.insert(player.bullets, bullet)
+  player.cooldown = 20
+  player.fire = function()
+    if player.cooldown <= 0 then
+      player.cooldown = 20
+      bullet = {}
+      bullet.x = player.x +35
+      bullet.y = 400
+      table.insert(player.bullets, bullet)
+    end
   end
 end
 
 function love.update(dt)
+  player.cooldown = player.cooldown - 1
+
   if love.keyboard.isDown("right") then
     player.x = player.x + 1 -- Valore intero positivo, permette di spostarsi a destra.
   elseif love.keyboard.isDown("left") then
