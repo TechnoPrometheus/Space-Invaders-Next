@@ -13,14 +13,16 @@ love_Engine_version: 0.10.2
 function love.load()
   player = {}
   player.x = 0
+  player.y = 550 -- Posizione del proiettile.
   player.bullets = {}
   player.cooldown = 20
+  player.speed = 5 -- Velocità di scorrimento del player.
   player.fire = function()
     if player.cooldown <= 0 then
       player.cooldown = 20
       bullet = {}
-      bullet.x = player.x +35
-      bullet.y = 400
+      bullet.x = player.x +35 -- Posizione di spawn del proiettile.
+      bullet.y = player.y
       table.insert(player.bullets, bullet)
     end
   end
@@ -30,9 +32,9 @@ function love.update(dt)
   player.cooldown = player.cooldown - 1
 
   if love.keyboard.isDown("right") then
-    player.x = player.x + 1 -- Valore intero positivo, permette di spostarsi a destra.
+    player.x = player.x + player.speed
   elseif love.keyboard.isDown("left") then
-    player.x = player.x - 1 -- Valore intero negativo, permette di spostarsi a sinistra.
+    player.x = player.x - player.speed
   end
 
   if love.keyboard.isDown("space") then
@@ -49,8 +51,11 @@ function love.update(dt)
 end
 
 function love.draw()
+  -- Disegna il player su schermo.
   love.graphics.setColor(0, 0, 255, alpha) -- Colorazione rettangolo (RGB)
-  love.graphics.rectangle("fill", player.x, 400, 80, 20)
+  love.graphics.rectangle("fill", player.x, player.y, 80, 20)
+
+  -- Disegna il proiettile su schermo.
   love.graphics.setColor(255, 255, 255, alpha) -- Colorazione proiettile (RGB).
 
   for _,b in pairs(player.bullets) do
