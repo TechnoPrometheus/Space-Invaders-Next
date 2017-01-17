@@ -26,7 +26,7 @@ function love.update(dt)
   if love.keyboard.isDown("right") then
     player.x = player.x + 1 -- Valore intero positivo, permette di spostarsi a destra.
   elseif love.keyboard.isDown("left") then
-    player.x = player.x - 1 -- Valore intero positivo, permette di spostarsi a sinistra.
+    player.x = player.x - 1 -- Valore intero negativo, permette di spostarsi a sinistra.
   end
 
   if love.keyboard.isDown("space") then
