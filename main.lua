@@ -1,4 +1,14 @@
-
+--[[
+=======================================================================
+title: Space Invaders Next
+description: Space Invaders, alternative version.
+author: Stefano Peris
+date: 17/01/2017
+version:0.1
+notes: nothing
+love_Engine_version: 0.10.2
+=======================================================================
+]]
 
 function love.load(arg)
   player = {}
