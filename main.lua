@@ -1,10 +1,11 @@
 --[[
 =======================================================================
-title: Space Invaders Next
-description: Space Invaders, alternative version.
-author: Stefano Peris
+title: Space Invaders Next - Copyright (c) 2017 Stefano Peris
+version:0.2
+license: MIT
+author: Stefano Peris {TechnoPrometheus}
 date: 17/01/2017
-version:0.1
+description: Space Invaders, alternative version.
 notes: nothing
 love_Engine_version: 0.10.2
 =======================================================================
@@ -13,15 +14,15 @@ love_Engine_version: 0.10.2
 function love.load()
   player = {}
   player.x = 0
-  player.y = 550 -- Posizione del proiettile.
+  player.y = 550 -- the projectile position.
   player.bullets = {}
   player.cooldown = 20
-  player.speed = 5 -- Velocità di scorrimento del player.
+  player.speed = 5 -- Speed of scrolling of the player.
   player.fire = function()
     if player.cooldown <= 0 then
       player.cooldown = 20
       bullet = {}
-      bullet.x = player.x +35 -- Posizione di spawn del proiettile.
+      bullet.x = player.x +35 -- bullets spawn position..
       bullet.y = player.y
       table.insert(player.bullets, bullet)
     end
@@ -51,11 +52,11 @@ function love.update(dt)
 end
 
 function love.draw()
-  -- Disegna il player su schermo.
+  -- draw player
   love.graphics.setColor(0, 0, 255, alpha) -- Colorazione rettangolo (RGB)
   love.graphics.rectangle("fill", player.x, player.y, 80, 20)
 
-  -- Disegna il proiettile su schermo.
+  -- draw bullets
   love.graphics.setColor(255, 255, 255, alpha) -- Colorazione proiettile (RGB).
 
   for _,b in pairs(player.bullets) do
