@@ -12,10 +12,10 @@ love_Engine_version: 0.10.2
 ]]
 
 function checkCollisions(enemies, bullets)
-  for _, e in pairs(enemies) do
+  for i, e in ipairs(enemies) do
     for _, b in pairs(bullets) do
       if b.y <= e.y + e.height and b.y > e.x and b.x < e.x + e.width then
-        print("COLLISION")
+        table.remove(enemies, i)
       end
     end
   end

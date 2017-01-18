@@ -21,9 +21,11 @@ function enemies_controller:spawnEnemy(x, y)
   enemy = {}
   enemy.x = x
   enemy.y = y -- the enemy position.
+  enemy.width = 10
+  enemy.height = 10
   enemy.bullets = {}
   enemy.cooldown = 20
-  enemy.speed = 2 -- Speed of scrolling of the enemy.
+  enemy.speed = .1 -- Speed of scrolling of the enemy.
   table.insert (self.enemies, enemy)
 end
 

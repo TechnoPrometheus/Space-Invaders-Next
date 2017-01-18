@@ -16,6 +16,9 @@ require("enemy")
 require "collisions"
 
 function love.load()
+  game_over = false
+  game_win = false
+  background_image = love.graphics.newImage("img/bg.jpg")
   player = {}
   player.x = 0
   player.y = 270 -- the bullet position.
@@ -34,8 +37,9 @@ function love.load()
       table.insert(player.bullets, bullet)
     end
   end
-  enemies_controller:spawnEnemy(0, 0)
-  enemies_controller:spawnEnemy(50, 0)
+  for i = 0, 10 do
+  enemies_controller:spawnEnemy(i * 15, 0)
+  end
 end
 
 function love.update(dt)
@@ -50,22 +54,39 @@ function love.update(dt)
   if love.keyboard.isDown("space") then
     player.fire()
   end
+  
+  if #enemies_controller.enemies == 0 then
+    -- we win!
+    game_win = true
+  end
 
   for _,e in pairs(enemies_controller.enemies) do
-    e.y = e.y +1
+    if e.y >= love.graphics.getHeight()/4 then
+      game_over = true
+    end
+    e.y = e.y + 1 * e.speed
   end
 
   for i,b in ipairs(player.bullets) do
     if b.y < -10 then
       table.remove(player.bullets, i)
   end
-
   b.y = b.y - 3 -- bullet speed.
   end
+  checkCollisions(enemies_controller.enemies, player.bullets)
 end
 
 function love.draw()
   love.graphics.scale(2)
+  love.graphics.draw(background_image)
+  if game_over then
+    love.graphics.print("Game Over!")
+    return
+  elseif game_win then
+    love.graphics.print("You Won!")
+    -- well leave the return out so that we get to shoot
+  end
+
   -- draw player
   love.graphics.setColor(255, 255, 255, alpha) -- player color (RGB)
   love.graphics.draw(player.image, player.x, player.y)
