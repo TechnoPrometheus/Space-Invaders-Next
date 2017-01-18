@@ -12,13 +12,14 @@ love_Engine_version: 0.10.2
 ]]
 
 require "conf"
+require "collisions"
 
 enemy = {}
 enemies_controller = {}
 enemies_controller.enemies = {}
 enemies_controller.image = love.graphics.newImage("img/InvaderB_01.png")
 love.graphics.getDefaultFilter("nearest", "nearest")
-enemy = {}
+
 
 function love.load()
   player = {}
