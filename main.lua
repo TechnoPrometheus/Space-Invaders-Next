@@ -10,6 +10,9 @@ notes: nothing
 love_Engine_version: 0.10.2
 =======================================================================
 ]]
+
+require "conf"
+
 enemy = {}
 enemies_controller = {}
 enemies_controller.enemies = {}
