@@ -18,6 +18,7 @@ enemies_controller = {}
 enemies_controller.enemies = {}
 enemies_controller.image = love.graphics.newImage("img/InvaderB_01.png")
 love.graphics.getDefaultFilter("nearest", "nearest")
+enemy = {}
 
 function love.load()
   player = {}
@@ -27,8 +28,10 @@ function love.load()
   player.cooldown = 20
   player.speed = 2 -- Speed of scrolling of the player.
   player.image = love.graphics.newImage("img/Ship.png")
+  player.fire_sound = love.audio.newSource("sound/ShipBullet.wav")
   player.fire = function()
     if player.cooldown <= 0 then
+    love.audio.play(player.fire_sound)
       player.cooldown = 20
       bullet = {}
       bullet.x = player.x +14 -- bullet spawn horizontal position.
@@ -54,7 +57,7 @@ function enemy:fire()
   if self.cooldown <= 0 then
     self.cooldown = 20
     bullet = {}
-    bullet.x = self.x +35 -- bullets spawn position..
+    bullet.x = self.x +35 -- bullets spawn position.
     bullet.y = self.y
     table.insert(self.bullets, bullet)
   end
