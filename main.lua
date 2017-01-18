@@ -14,8 +14,12 @@ love_Engine_version: 0.10.2
 require "conf"
 require("enemy")
 require "collisions"
+require("particles")
 
 function love.load()
+  local music = love.audio.newSource("sound/music.mp3")
+  music:setLooping(true)
+  love.audio.play(music)
   game_over = false
   game_win = false
   background_image = love.graphics.newImage("img/bg.jpg")
@@ -43,6 +47,7 @@ function love.load()
 end
 
 function love.update(dt)
+  particle_systems:update(dt)
   player.cooldown = player.cooldown - 1
 
   if love.keyboard.isDown("right") then
@@ -84,8 +89,11 @@ function love.draw()
     return
   elseif game_win then
     love.graphics.print("You Won!")
-    -- well leave the return out so that we get to shoot
+    -- we'll leave the return out so that we get to shoot
+    -- victoriously into space
   end
+  
+  particle_systems:draw()
 
   -- draw player
   love.graphics.setColor(255, 255, 255, alpha) -- player color (RGB)
@@ -94,12 +102,11 @@ function love.draw()
   -- draw enemies
   love.graphics.setColor(255, 255, 255, alpha) -- enemy color (RGB)
   for _,e in pairs(enemies_controller.enemies) do
-    love.graphics.draw(enemies_controller.image, e.x, e.y, 0, 1)
+    love.graphics.draw(enemies_controller.image, e.x, e.y, 0)
   end
 
   -- draw bullets
   love.graphics.setColor(255, 255, 255, alpha) -- bullets color (RGB).
-
   for _,b in pairs(player.bullets) do
     love.graphics.rectangle("fill", b.x, b.y, 2, 2)
   end

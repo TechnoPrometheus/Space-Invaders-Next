@@ -16,6 +16,9 @@ enemies_controller = {}
 enemies_controller.enemies = {}
 enemies_controller.image = love.graphics.newImage("img/InvaderB_01.png")
 love.graphics.getDefaultFilter("nearest", "nearest")
+particle_systems = {}
+particle_systems.list = {}
+particle_systems.img = love.graphics.newImage("img/particle.png")
 
 function enemies_controller:spawnEnemy(x, y)
   enemy = {}
@@ -33,7 +36,7 @@ function enemy:fire()
   if self.cooldown <= 0 then
     self.cooldown = 20
     bullet = {}
-    bullet.x = self.x +35 -- bullets spawn position.
+    bullet.x = self.x + 35 -- bullets spawn position.
     bullet.y = self.y
     table.insert(self.bullets, bullet)
   end
